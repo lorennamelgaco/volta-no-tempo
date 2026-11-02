@@ -135,3 +135,150 @@ if (telaEntrada && botaoComecar) {
 }
 
 /* O player é controlado pelo seletor inline definido no index.html. */
+
+
+/* =========================================
+   NAVEGAÇÃO SUAVE E CAPÍTULO ATIVO
+========================================= */
+
+const linksInternos = document.querySelectorAll('a[href^="#"]');
+linksInternos.forEach((link) => {
+    link.addEventListener('click', (evento) => {
+        const destino = document.querySelector(link.getAttribute('href'));
+        if (!destino) return;
+        evento.preventDefault();
+        destino.scrollIntoView({
+            behavior: movimentoReduzido ? 'auto' : 'smooth',
+            block: 'start'
+        });
+    });
+});
+
+const secoesNavegacao = document.querySelectorAll(
+    'main section[id], header#inicio'
+);
+const linksMenu = document.querySelectorAll('.menu a[href^="#"]');
+
+if ('IntersectionObserver' in window && secoesNavegacao.length) {
+    const observadorMenu = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            if (!entrada.isIntersecting) return;
+            linksMenu.forEach((link) => {
+                const ativo = link.getAttribute('href') === '#' + entrada.target.id;
+                link.classList.toggle('ativo', ativo);
+                if (ativo) link.setAttribute('aria-current', 'location');
+                else link.removeAttribute('aria-current');
+            });
+        });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    secoesNavegacao.forEach((secao) => observadorMenu.observe(secao));
+}
+
+/* =========================================
+   BOTÃO VOLTAR AO TOPO
+========================================= */
+
+const botaoVoltarTopo = document.querySelector('.voltar-topo');
+
+if (botaoVoltarTopo) {
+    const atualizarBotaoTopo = () => {
+        botaoVoltarTopo.classList.toggle('visivel', window.scrollY > 500);
+    };
+    window.addEventListener('scroll', atualizarBotaoTopo, { passive: true });
+    atualizarBotaoTopo();
+
+    botaoVoltarTopo.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: movimentoReduzido ? 'auto' : 'smooth'
+        });
+    });
+}
+
+/* =========================================
+   LIGHTBOX — FOTOS EM TAMANHO MAIOR
+========================================= */
+
+const imagensGaleria = Array.from(document.querySelectorAll(
+    '.galeria-casal-grid img, .memorias-grid .memoria-imagem img, .album-gatos .moldura-foto img'
+));
+
+if (imagensGaleria.length) {
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox-fotos';
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.setAttribute('aria-label', 'Visualização das fotografias');
+    lightbox.innerHTML = `
+        <button class="lightbox-fechar" type="button" aria-label="Fechar fotografia">×</button>
+        <button class="lightbox-seta lightbox-anterior" type="button" aria-label="Fotografia anterior">‹</button>
+        <div class="lightbox-conteudo">
+            <img alt="">
+            <p class="lightbox-legenda"></p>
+            <span class="lightbox-contador"></span>
+        </div>
+        <button class="lightbox-seta lightbox-proxima" type="button" aria-label="Próxima fotografia">›</button>
+    `;
+    document.body.appendChild(lightbox);
+
+    const imagemAmpliada = lightbox.querySelector('img');
+    const legendaAmpliada = lightbox.querySelector('.lightbox-legenda');
+    const contadorAmpliado = lightbox.querySelector('.lightbox-contador');
+    const fecharLightbox = lightbox.querySelector('.lightbox-fechar');
+    let indiceFoto = 0;
+    let ultimoElemento = null;
+
+    function mostrarFoto(indice) {
+        indiceFoto = (indice + imagensGaleria.length) % imagensGaleria.length;
+        const foto = imagensGaleria[indiceFoto];
+        imagemAmpliada.src = foto.currentSrc || foto.src;
+        imagemAmpliada.alt = foto.alt || 'Fotografia da nossa história';
+        const legenda = foto.closest('figure')?.querySelector('figcaption')?.textContent
+            || foto.closest('.memoria-foto')?.querySelector('.memoria-legenda h3')?.textContent
+            || foto.closest('.foto-polaroid')?.querySelector('h3')?.textContent
+            || foto.alt;
+        legendaAmpliada.textContent = legenda;
+        contadorAmpliado.textContent = (indiceFoto + 1) + ' / ' + imagensGaleria.length;
+    }
+
+    function abrirLightbox(indice) {
+        ultimoElemento = document.activeElement;
+        mostrarFoto(indice);
+        lightbox.classList.add('aberto');
+        document.body.classList.add('lightbox-aberto');
+        fecharLightbox.focus();
+    }
+
+    function fecharJanelaFotos() {
+        lightbox.classList.remove('aberto');
+        document.body.classList.remove('lightbox-aberto');
+        if (ultimoElemento) ultimoElemento.focus();
+    }
+
+    imagensGaleria.forEach((foto, indice) => {
+        foto.addEventListener('click', () => abrirLightbox(indice));
+        foto.setAttribute('tabindex', '0');
+        foto.setAttribute('role', 'button');
+        foto.setAttribute('aria-label', 'Ampliar fotografia: ' + (foto.alt || 'lembrança'));
+        foto.addEventListener('keydown', (evento) => {
+            if (evento.key === 'Enter' || evento.key === ' ') {
+                evento.preventDefault();
+                abrirLightbox(indice);
+            }
+        });
+    });
+
+    fecharLightbox.addEventListener('click', fecharJanelaFotos);
+    lightbox.querySelector('.lightbox-anterior').addEventListener('click', () => mostrarFoto(indiceFoto - 1));
+    lightbox.querySelector('.lightbox-proxima').addEventListener('click', () => mostrarFoto(indiceFoto + 1));
+    lightbox.addEventListener('click', (evento) => {
+        if (evento.target === lightbox) fecharJanelaFotos();
+    });
+
+    document.addEventListener('keydown', (evento) => {
+        if (!lightbox.classList.contains('aberto')) return;
+        if (evento.key === 'Escape') fecharJanelaFotos();
+        if (evento.key === 'ArrowLeft') mostrarFoto(indiceFoto - 1);
+        if (evento.key === 'ArrowRight') mostrarFoto(indiceFoto + 1);
+    });
+}
