@@ -1691,18 +1691,7 @@ body.lightbox-aberto { overflow: hidden; }
 }
 
 
-/* Mantém a página travada na apresentação até o clique em Abrir nossa história. */
-html:has(body.aguardando-historia) {
-    overflow: hidden !important;
-    height: 100%;
-}
-
-body.aguardando-historia {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    overflow: hidden !important;
-    overscroll-behavior: none;
-    touch-action: none;
+/* Antes do clique, permite rolar a apresentação até o botão, mas mantém os capítulos ocultos. */
+body.aguardando-historia main {
+    display: none !important;
 }
