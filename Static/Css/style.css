@@ -1689,3 +1689,9 @@ body.lightbox-aberto { overflow: hidden; }
 .album-gatos img {
     cursor: zoom-in;
 }
+
+
+/* Mantém a página na apresentação até o clique em Abrir nossa história. */
+body.aguardando-historia {
+    overflow: hidden;
+}
