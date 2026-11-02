@@ -300,7 +300,7 @@
             </div>
 
             <div class="carta-interativa">
-                <button class="envelope-carta" id="abrirCarta" type="button" aria-expanded="false" aria-controls="textoCarta">
+                <button class="envelope-carta" id="abrirCarta" type="button" onclick="window.alternarCarta()" aria-expanded="false" aria-controls="textoCarta">
                     <span class="selo-carta">♡</span>
                     <span class="envelope-etiqueta">UMA CARTA PARA VOCÊ</span>
                     <strong>Com carinho, Momozi.</strong>
@@ -369,20 +369,28 @@
     <script src="Static/Js/script.js"></script>
     <script>
         // Abertura da carta: revela o texto com uma transição suave.
-        const botaoCarta = document.getElementById('abrirCarta');
-        const textoCarta = document.getElementById('textoCarta');
+        // Controle direto do envelope, no mesmo padrão do botão de música.
+        window.alternarCarta = function () {
+            const botao = document.getElementById('abrirCarta');
+            const carta = document.getElementById('textoCarta');
 
-        if (botaoCarta && textoCarta) {
-            botaoCarta.addEventListener('click', () => {
-                const aberta = botaoCarta.getAttribute('aria-expanded') === 'true';
-                botaoCarta.setAttribute('aria-expanded', String(!aberta));
-                textoCarta.classList.toggle('carta-fechada', aberta);
-                textoCarta.setAttribute('aria-hidden', String(aberta));
-                botaoCarta.classList.toggle('envelope-aberto', !aberta);
-                botaoCarta.querySelector('.envelope-instrucao').textContent =
-                    aberta ? 'Toque para abrir' : 'A carta foi aberta';
-            });
-        }
+            if (!botao || !carta) return;
+
+            const aberta = botao.getAttribute('aria-expanded') === 'true';
+            const novaSituacao = !aberta;
+
+            botao.setAttribute('aria-expanded', String(novaSituacao));
+            carta.classList.toggle('carta-fechada', !novaSituacao);
+            carta.setAttribute('aria-hidden', String(!novaSituacao));
+            botao.classList.toggle('envelope-aberto', novaSituacao);
+
+            const instrucao = botao.querySelector('.envelope-instrucao');
+            if (instrucao) {
+                instrucao.textContent = novaSituacao
+                    ? 'A carta foi aberta'
+                    : 'Toque para abrir';
+            }
+        };
 
         // Controle direto dos botões de música, independente dos demais scripts.
         window.selecionarMusica = function (botao) {
