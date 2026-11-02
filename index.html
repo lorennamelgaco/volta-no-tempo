@@ -522,7 +522,7 @@
             if (abrirHistoria) {
                 abrirHistoria.addEventListener('click', function () {
                     document.body.classList.remove('aguardando-historia');
-                    document.querySelector('#historia')?.scrollIntoView({ behavior: 'smooth' });
+                    // O link e o script principal cuidam do deslocamento até o capítulo.
                 });
             }
 
