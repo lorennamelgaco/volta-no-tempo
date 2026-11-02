@@ -88,10 +88,6 @@ if ('IntersectionObserver' in window) {
    MENU PARA CELULAR
 ========================================= */
 
-/* =========================================
-   MENU PARA CELULAR
-========================================= */
-
 const botaoMenu = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.menu');
 
@@ -116,5 +112,26 @@ if (botaoMenu && menu) {
     });
 }
 
+/* =========================================
+   TELA DE ENTRADA — COMEÇAR NOSSA HISTÓRIA
+========================================= */
+
+const telaEntrada = document.querySelector('#telaEntrada');
+const botaoComecar = document.querySelector('#comecarHistoria');
+
+if (telaEntrada && botaoComecar) {
+    botaoComecar.addEventListener('click', () => {
+        telaEntrada.classList.add('saindo');
+        document.body.classList.remove('tela-bloqueada');
+
+        window.setTimeout(() => {
+            telaEntrada.remove();
+
+            document.querySelector('#inicio')?.scrollIntoView({
+                behavior: movimentoReduzido ? 'auto' : 'smooth'
+            });
+        }, movimentoReduzido ? 0 : 1000);
+    });
+}
 
 /* O player é controlado pelo seletor inline definido no index.html. */
