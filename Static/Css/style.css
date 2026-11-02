@@ -1011,3 +1011,177 @@ body.tela-bloqueada {
     .botao-musica { padding: 12px 14px; }
     .botao-musica strong { font-size: 18px; }
 }
+
+
+/* =========================================
+   CARTA INTERATIVA — ENVELOPE E PAPEL
+========================================= */
+.carta-interativa {
+    width: min(820px, 100%);
+    margin: 0 auto;
+}
+.envelope-carta {
+    position: relative;
+    display: flex;
+    width: min(560px, 100%);
+    min-height: 245px;
+    margin: 0 auto 28px;
+    padding: 38px 25px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #352b2b;
+    border: 1px solid rgba(240,217,168,.7);
+    border-radius: 5px;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.35), transparent 45%),
+        #d9c6a7;
+    box-shadow: 0 22px 65px rgba(0,0,0,.32), inset 0 0 35px rgba(111,75,48,.1);
+    cursor: pointer;
+    transition: transform .65s cubic-bezier(.2,.8,.2,1), box-shadow .65s ease, background .65s ease;
+}
+.envelope-carta::before,
+.envelope-carta::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(104,75,50,.17);
+}
+.envelope-carta::before { top: 18px; }
+.envelope-carta::after { bottom: 18px; }
+.envelope-carta:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 75px rgba(0,0,0,.4), inset 0 0 35px rgba(111,75,48,.1);
+}
+.selo-carta {
+    display: grid;
+    place-items: center;
+    width: 43px;
+    height: 43px;
+    margin-bottom: 14px;
+    color: #f8e8cf;
+    border-radius: 50%;
+    background: #8d5d5b;
+    font-size: 23px;
+    box-shadow: 0 4px 12px rgba(50,25,25,.2);
+}
+.envelope-etiqueta {
+    color: #78614b;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+.envelope-carta strong {
+    margin-top: 7px;
+    color: #3e3030;
+    font: 600 36px var(--serif);
+}
+.envelope-instrucao {
+    margin-top: 8px;
+    color: #806c57;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.envelope-icone {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    color: rgba(104,75,50,.45);
+    font-size: 27px;
+}
+.envelope-carta.envelope-aberto {
+    transform: translateY(-3px) scale(.985);
+    background: #cbb590;
+}
+.carta-presente {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(217,189,131,.32);
+    border-left: 2px solid var(--dourado);
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.055), transparent 50%),
+        rgba(18,25,39,.92);
+    box-shadow: 0 25px 70px rgba(0,0,0,.22);
+    transition: opacity .8s ease, transform .8s ease, max-height .9s ease, padding .8s ease, margin .8s ease;
+}
+.carta-presente.carta-fechada {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: translateY(22px);
+    pointer-events: none;
+}
+.carta-presente:not(.carta-fechada) {
+    max-height: 1400px;
+    animation: papelRevelado .9s cubic-bezier(.2,.8,.2,1) both;
+}
+.carta-presente p {
+    font: 400 15px/2.15 var(--serif);
+    color: #e2d9cb;
+}
+.carta-presente p:first-child::first-letter {
+    float: left;
+    padding: 5px 9px 0 0;
+    color: var(--dourado-claro);
+    font: 600 52px/.8 var(--serif);
+}
+.fecho-carta {
+    padding-top: 22px;
+    color: var(--dourado-claro) !important;
+    font-style: italic !important;
+    text-align: right;
+}
+.fecho-carta span { padding-left: 5px; color: #d9a9a9; }
+@keyframes papelRevelado {
+    from { opacity: 0; transform: translateY(24px) scale(.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Transições mais orgânicas entre os capítulos */
+.revelar {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(42px) scale(.985);
+    transition:
+        opacity 1s cubic-bezier(.2,.7,.2,1),
+        transform 1s cubic-bezier(.2,.7,.2,1),
+        filter 1s ease;
+}
+.revelar.visivel {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+}
+.capitulo .cabecalho-capitulo,
+.capitulo .texto-pagina,
+.capitulo .nota-lateral,
+.capitulo .foto-placeholder,
+.capitulo .foto-polaroid,
+.capitulo .cartao-sonho {
+    transition-delay: .08s;
+}
+.pagina-scrapbook,
+.cartao-sonho,
+.foto-polaroid,
+.carta-presente {
+    transition-timing-function: cubic-bezier(.2,.7,.2,1);
+}
+@media (max-width: 600px) {
+    .envelope-carta { min-height: 220px; padding: 32px 18px; }
+    .envelope-carta strong { font-size: 30px; }
+    .carta-presente { padding: 30px 24px; }
+    .carta-presente p { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .revelar, .carta-presente, .envelope-carta {
+        filter: none;
+        animation: none !important;
+        transition: none !important;
+    }
+}
