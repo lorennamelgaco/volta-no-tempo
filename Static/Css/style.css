@@ -1314,3 +1314,31 @@ body.tela-bloqueada {
     .carta-presente:not(.carta-fechada) { padding: 34px 24px 30px; }
     .carta-presente p { font-size: 15px; }
 }
+
+ 
+/* =========================================
+   AJUSTE DAS FOTOS DA GALERIA DE MEMÓRIAS
+   Mantém a proporção original, sem esticar.
+========================================= */
+.memoria-imagem {
+    min-height: 0;
+    height: 320px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    background: #d8cbb7;
+}
+
+.memoria-imagem img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 650px) {
+    .memoria-imagem {
+        height: 280px;
+    }
+}
