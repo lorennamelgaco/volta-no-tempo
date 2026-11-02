@@ -1692,6 +1692,7 @@ body.lightbox-aberto { overflow: hidden; }
 
 
 /* Antes do clique, permite rolar a apresentação até o botão, mas mantém os capítulos ocultos. */
-body.aguardando-historia main {
+body.aguardando-historia main,
+body.aguardando-historia footer.final {
     display: none !important;
 }
