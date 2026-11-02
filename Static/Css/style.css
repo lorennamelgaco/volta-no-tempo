@@ -1676,3 +1676,16 @@ body.lightbox-aberto { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
     .lightbox-fotos, .voltar-topo { transition: none; }
 }
+
+
+/* Correção de segurança: botão de topo sempre visível */
+.voltar-topo {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+.galeria-casal-grid img,
+.memorias-grid img,
+.album-gatos img {
+    cursor: zoom-in;
+}
