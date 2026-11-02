@@ -38,6 +38,7 @@
             <a href="#casa">Nosso lar</a>
             <a href="#familia">Nossa família</a>
             <a href="#sonhos">Nossos sonhos</a>
+            <a href="#memorias">Nossas lembranças</a>
         </div>
     </nav>
 
@@ -292,11 +293,70 @@
     </p>
 </section>
 
-        <section class="capitulo presente">
+        <section class="capitulo capitulo-alternado" id="memorias">
             <div class="cabecalho-capitulo">
                 <span class="numero-capitulo">05</span>
+                <p class="identificacao">PEQUENOS GRANDES MOMENTOS</p>
+                <h2>Alguns dias que ficaram com a gente</h2>
+                <p class="frase-capitulo">Tem lembrança que merece uma página só dela.</p>
+            </div>
+
+            <div class="memorias-grid">
+                <article class="memoria-foto">
+                    <div class="memoria-imagem">
+                        <span>♡</span>
+                        <small>FOTO EM BREVE</small>
+                    </div>
+                    <div class="memoria-legenda">
+                        <span>UM DIA PARA GUARDAR</span>
+                        <h3>O pedido de namoro</h3>
+                        <p>O dia em que demos nome ao que já estava nascendo entre nós.</p>
+                    </div>
+                </article>
+
+                <article class="memoria-foto memoria-deslocada">
+                    <div class="memoria-imagem">
+                        <span>☼</span>
+                        <small>FOTO EM BREVE</small>
+                    </div>
+                    <div class="memoria-legenda">
+                        <span>NOSSA PRIMEIRA VEZ</span>
+                        <h3>A primeira praia</h3>
+                        <p>Uma lembrança com cheiro de mar, sol e um pedacinho de liberdade.</p>
+                    </div>
+                </article>
+
+                <article class="memoria-foto">
+                    <div class="memoria-imagem">
+                        <span>✧</span>
+                        <small>FOTO EM BREVE</small>
+                    </div>
+                    <div class="memoria-legenda">
+                        <span>ÉPOCA DE CELEBRAR</span>
+                        <h3>Nosso Natal</h3>
+                        <p>Mais um capítulo feito de detalhes que ganharam significado para nós.</p>
+                    </div>
+                </article>
+
+                <article class="memoria-foto memoria-deslocada">
+                    <div class="memoria-imagem">
+                        <span>✦</span>
+                        <small>FOTO EM BREVE</small>
+                    </div>
+                    <div class="memoria-legenda">
+                        <span>UM NOVO COMEÇO</span>
+                        <h3>Nosso Ano-Novo</h3>
+                        <p>Uma virada de calendário e mais uma lembrança para levar adiante.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="capitulo presente">
+            <div class="cabecalho-capitulo">
+                <span class="numero-capitulo">06</span>
                 <p class="identificacao">SEM PULAR NENHUMA PÁGINA</p>
-                <h2>Sobre o agora</h2>
+                <h2>Uma pausa para sentir</h2>
             </div>
 
             <div class="carta-interativa">
@@ -308,6 +368,7 @@
                     <span class="envelope-icone" aria-hidden="true">✉</span>
                 </button>
                 <div class="carta-presente carta-fechada" id="textoCarta" aria-hidden="true">
+                <span class="carta-data">UMA CARTA ESCRITA COM CALMA</span>
                 <p>
                     Eu sei que, em algum momento, a vida foi ficando corrida.
                     Vieram o trabalho, as responsabilidades, o cansaço e a rotina.
@@ -331,6 +392,7 @@
                     antes de qualquer rotina, existe uma história que foi construída por duas pessoas.
                 </p>
                 <p class="fecho-carta">Com carinho, para nós duas. <span>♡</span></p>
+                <p class="fecho-nota">Leia no seu tempo. Não existe pressa.</p>
                 </div>
             </div>
         </section>
@@ -339,7 +401,7 @@
     <footer class="final">
         <span class="identificacao">A ÚLTIMA PÁGINA... POR ENQUANTO</span>
         <div class="ornamento">✧　♡　✧</div>
-        <h2>A história ainda está sendo escrita.</h2>
+        <h2>O próximo capítulo não precisa ser decidido hoje.</h2>
         <p>
             Não sei exatamente o que o amanhã reserva.
             Não tenho como prometer que tudo será fácil ou que nunca teremos dias complicados.
@@ -354,9 +416,8 @@
             e os sonhos que ainda moram por aqui.
         </p>
         <p>
-            Se ainda existir vontade dos dois lados, espero que a gente possa
-            encontrar novas formas de se escolher, de se ouvir, de cuidar uma da outra
-            e de construir momentos que façam sentido.
+            Se também fizer sentido para você, gostaria que a gente pudesse conversar,
+            se ouvir com calma e descobrir, sem pressa, o que ainda podemos construir.
         </p>
         <p>
             E, independentemente do que vier, obrigada por tantos capítulos
@@ -381,6 +442,7 @@
 
             botao.setAttribute('aria-expanded', String(novaSituacao));
             carta.classList.toggle('carta-fechada', !novaSituacao);
+            carta.classList.toggle('visivel', novaSituacao);
             carta.setAttribute('aria-hidden', String(!novaSituacao));
             botao.classList.toggle('envelope-aberto', novaSituacao);
 
