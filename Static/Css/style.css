@@ -1493,3 +1493,71 @@ body.tela-bloqueada {
     .carta-lar p { font-size: 14px; line-height: 1.9; }
     .carta-lar-etiqueta { font-size: 7px; letter-spacing: 2px; }
 }
+
+/* =========================================
+   ACABAMENTO VISUAL E ACESSIBILIDADE
+========================================= */
+
+/* Destaque ao navegar usando teclado */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--dourado-claro);
+    outline-offset: 5px;
+}
+
+/* Menu com indicação visual de interação */
+.menu-toggle {
+    cursor: pointer;
+    transition: background .3s ease, color .3s ease;
+}
+
+.menu-toggle:hover {
+    color: var(--bege);
+    background: rgba(217,189,131,.10);
+}
+
+/* Detalhes delicados nos cartões de sonhos */
+.cartao-sonho {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.12);
+}
+
+.cartao-sonho::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 1px solid rgba(217,189,131,.10);
+    pointer-events: none;
+    transition: border-color .4s ease;
+}
+
+.cartao-sonho:hover::before {
+    border-color: rgba(217,189,131,.35);
+}
+
+.cartao-sonho:hover {
+    box-shadow: 0 22px 50px rgba(0,0,0,.22);
+}
+
+/* Respeita quem prefere menos animações */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+    .revelar {
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+    }
+}

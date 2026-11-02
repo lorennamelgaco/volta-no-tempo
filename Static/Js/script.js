@@ -88,72 +88,31 @@ if ('IntersectionObserver' in window) {
    MENU PARA CELULAR
 ========================================= */
 
+/* =========================================
+   MENU PARA CELULAR
+========================================= */
+
 const botaoMenu = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.menu');
 
 if (botaoMenu && menu) {
     botaoMenu.addEventListener('click', () => {
-        menu.classList.toggle('aberto');
+        const menuAberto = menu.classList.toggle('aberto');
 
+        botaoMenu.setAttribute('aria-expanded', String(menuAberto));
         botaoMenu.setAttribute(
-            'aria-expanded',
-            menu.classList.contains('aberto')
+            'aria-label',
+            menuAberto ? 'Fechar menu' : 'Abrir menu'
         );
     });
 
     menu.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
             menu.classList.remove('aberto');
+
             botaoMenu.setAttribute('aria-expanded', 'false');
+            botaoMenu.setAttribute('aria-label', 'Abrir menu');
         });
-    });
-}
-
-/* =========================================
-   NAVEGAÇÃO SUAVE
-========================================= */
-
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', (evento) => {
-        const destino = document.querySelector(
-            link.getAttribute('href')
-        );
-
-        if (destino) {
-            evento.preventDefault();
-            destino.scrollIntoView({
-                behavior: movimentoReduzido ? 'auto' : 'smooth'
-            });
-        }
-    });
-});
-
-/* =========================================
-   MENSAGEM NO CONSOLE
-========================================= */
-
-console.log('Uma história que começou em 03.03.2023 ❤️');
-console.log('Entre tudo que fomos e tudo que ainda podemos ser.');
-
-
-/* =========================================
-   TELA DE ENTRADA
-========================================= */
-
-const telaEntrada = document.querySelector('#telaEntrada');
-const botaoComecar = document.querySelector('#comecarHistoria');
-
-if (telaEntrada && botaoComecar) {
-    botaoComecar.addEventListener('click', () => {
-        telaEntrada.classList.add('saindo');
-        document.body.classList.remove('tela-bloqueada');
-
-        window.setTimeout(() => {
-            telaEntrada.remove();
-            document.querySelector('#inicio')?.scrollIntoView({
-                behavior: movimentoReduzido ? 'auto' : 'smooth'
-            });
-        }, movimentoReduzido ? 0 : 1000);
     });
 }
 

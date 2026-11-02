@@ -31,9 +31,16 @@
     <div class="nebulosa nebulosa-dois"></div>
 
     <nav class="navegacao">
-        <a href="#inicio" class="logo">Nós duas<span>.</span></a>
-        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
-        <div class="menu">
+
+<button
+    class="menu-toggle"
+    type="button"
+    aria-label="Abrir menu"
+    aria-expanded="false"
+    aria-controls="menuPrincipal"
+>☰</button>
+
+<div class="menu" id="menuPrincipal">
             <a href="#historia">Nossa história</a>
             <a href="#casa">Nosso lar</a>
             <a href="#familia">Nossa família</a>
@@ -59,7 +66,7 @@
     <p class="identificacao">NOSSA HISTÓRIA TEM TRILHA SONORA</p>
     <h2>Escolha a música que quer ouvir. ❤️</h2>
     <div class="seletor-musicas" role="group" aria-label="Escolha uma música">
-        <button class="botao-musica ativo" type="button" data-video="VPRjCeoBqrI" onclick="selecionarMusica(this)" aria-pressed="true">
+        <button class="botao-musica" type="button" data-video="VPRjCeoBqrI" onclick="selecionarMusica(this)" aria-pressed="false">
             <span>♫</span>
             <span><strong>A Sky Full of Stars</strong><small>Coldplay</small></span>
         </button>
