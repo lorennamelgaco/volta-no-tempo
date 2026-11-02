@@ -299,7 +299,15 @@
                 <h2>Sobre o agora</h2>
             </div>
 
-            <div class="carta-presente">
+            <div class="carta-interativa">
+                <button class="envelope-carta" id="abrirCarta" type="button" aria-expanded="false" aria-controls="textoCarta">
+                    <span class="selo-carta">♡</span>
+                    <span class="envelope-etiqueta">UMA CARTA PARA VOCÊ</span>
+                    <strong>Com carinho, Momozi.</strong>
+                    <span class="envelope-instrucao">Toque para abrir</span>
+                    <span class="envelope-icone" aria-hidden="true">✉</span>
+                </button>
+                <div class="carta-presente carta-fechada" id="textoCarta" aria-hidden="true">
                 <p>
                     Eu sei que, em algum momento, a vida foi ficando corrida.
                     Vieram o trabalho, as responsabilidades, o cansaço e a rotina.
@@ -322,6 +330,8 @@
                     Só não queria que a correria dos dias fizesse a gente esquecer que,
                     antes de qualquer rotina, existe uma história que foi construída por duas pessoas.
                 </p>
+                <p class="fecho-carta">Com carinho, para nós duas. <span>♡</span></p>
+                </div>
             </div>
         </section>
     </main>
@@ -358,6 +368,22 @@
 
     <script src="Static/Js/script.js"></script>
     <script>
+        // Abertura da carta: revela o texto com uma transição suave.
+        const botaoCarta = document.getElementById('abrirCarta');
+        const textoCarta = document.getElementById('textoCarta');
+
+        if (botaoCarta && textoCarta) {
+            botaoCarta.addEventListener('click', () => {
+                const aberta = botaoCarta.getAttribute('aria-expanded') === 'true';
+                botaoCarta.setAttribute('aria-expanded', String(!aberta));
+                textoCarta.classList.toggle('carta-fechada', aberta);
+                textoCarta.setAttribute('aria-hidden', String(aberta));
+                botaoCarta.classList.toggle('envelope-aberto', !aberta);
+                botaoCarta.querySelector('.envelope-instrucao').textContent =
+                    aberta ? 'Toque para abrir' : 'A carta foi aberta';
+            });
+        }
+
         // Controle direto dos botões de música, independente dos demais scripts.
         window.selecionarMusica = function (botao) {
             const player = document.getElementById('youtubePlayer');
