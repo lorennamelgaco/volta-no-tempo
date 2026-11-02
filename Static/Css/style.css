@@ -1,17 +1,20 @@
 
 /* =========================================
-   CONFIGURAÇÕES GERAIS
+   NOSSA HISTÓRIA — ESTILO PRINCIPAL
 ========================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
-    --fundo: #0b1020;
-    --fundo-secundario: #111a2e;
+    --fundo: #080d19;
+    --fundo-secundario: #10192b;
+    --fundo-card: rgba(255, 255, 255, 0.035);
     --dourado: #d9bd83;
+    --dourado-claro: #f0d9a8;
     --bege: #f1e6d3;
     --texto: #d5d5df;
-    --detalhe: #596078;
+    --texto-suave: #a9adbd;
+    --borda: rgba(217, 189, 131, 0.24);
 }
 
 * {
@@ -29,15 +32,15 @@ body {
 }
 
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 section {
-    padding: 110px 10%;
+    position: relative;
+    padding: 125px 10%;
     text-align: center;
 }
-
 
 /* =========================================
    TELA INICIAL
@@ -51,41 +54,46 @@ section {
     overflow: hidden;
 
     background:
-        radial-gradient(ellipse at 50% 100%, #263653 0%, transparent 55%),
-        linear-gradient(180deg, #080d19, #111a2e);
+        radial-gradient(ellipse at 50% 85%, rgba(64, 82, 119, 0.38), transparent 55%),
+        radial-gradient(ellipse at 10% 20%, rgba(91, 76, 105, 0.13), transparent 40%),
+        linear-gradient(180deg, #050914 0%, #0b1323 55%, #111a2e 100%);
 }
 
-/* Estrelas */
+.inicio::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        180deg,
+        transparent 70%,
+        rgba(8, 13, 25, 0.55)
+    );
+}
 
 .ceu-estrelado {
     position: absolute;
     inset: 0;
+    overflow: hidden;
 
     background-image:
         radial-gradient(2px 2px at 20% 30%, #fff, transparent),
         radial-gradient(1px 1px at 70% 20%, #fff, transparent),
-        radial-gradient(2px 2px at 85% 65%, #d9bd83, transparent),
+        radial-gradient(2px 2px at 85% 65%, var(--dourado), transparent),
         radial-gradient(1px 1px at 40% 80%, #fff, transparent),
         radial-gradient(2px 2px at 60% 50%, #fff, transparent),
-        radial-gradient(1px 1px at 10% 70%, #d9bd83, transparent),
+        radial-gradient(1px 1px at 10% 70%, var(--dourado), transparent),
         radial-gradient(1px 1px at 90% 15%, #fff, transparent);
 
     background-size: 350px 350px;
     opacity: 0.65;
-
     animation: brilho 5s ease-in-out infinite alternate;
 }
 
 @keyframes brilho {
-    from {
-        opacity: 0.35;
-    }
-
-    to {
-        opacity: 0.9;
-    }
+    from { opacity: 0.3; }
+    to { opacity: 0.85; }
 }
-
 
 /* =========================================
    NAVEGAÇÃO
@@ -100,13 +108,18 @@ section {
     align-items: center;
 
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 .logo {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 30px;
+    font-size: 31px;
     color: var(--dourado);
+    transition: 0.3s;
+}
+
+.logo:hover {
+    color: var(--dourado-claro);
 }
 
 .menu {
@@ -115,15 +128,31 @@ section {
 }
 
 .menu a {
-    font-size: 12px;
-    letter-spacing: 1px;
+    position: relative;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: #c6c8d1;
     transition: 0.3s;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0;
+    height: 1px;
+    background: var(--dourado);
+    transition: width 0.3s;
 }
 
 .menu a:hover {
     color: var(--dourado);
 }
 
+.menu a:hover::after {
+    width: 100%;
+}
 
 /* =========================================
    CONTEÚDO INICIAL
@@ -131,35 +160,34 @@ section {
 
 .conteudo-inicial {
     flex: 1;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
     text-align: center;
-    padding: 60px 20px;
+    padding: 70px 20px;
 
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .data,
 .identificacao {
     color: var(--dourado);
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 4px;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
 }
 
 .conteudo-inicial h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 6vw, 78px);
+    font-size: clamp(44px, 6vw, 82px);
     font-weight: 400;
-    line-height: 1.1;
-
+    line-height: 1.08;
     color: var(--bege);
-    max-width: 950px;
+    max-width: 1000px;
 }
 
 .conteudo-inicial h1 span {
@@ -170,33 +198,39 @@ section {
 
 .subtitulo {
     margin-top: 25px;
-    font-size: 13px;
-    letter-spacing: 3px;
-    color: #b9b9c6;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--texto-suave);
+    text-transform: uppercase;
 }
 
 .mensagem-inicial {
-    max-width: 550px;
-    margin-top: 55px;
+    max-width: 590px;
+    margin-top: 48px;
     line-height: 2;
-    font-size: 14px;
+    font-size: 13px;
+    color: #c6c8d1;
+}
+
+.mensagem-inicial p {
+    margin-bottom: 14px;
 }
 
 .mensagem-inicial p:first-child {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+    font-size: 31px;
     color: var(--dourado);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .botao-historia {
-    margin-top: 40px;
-    padding: 16px 35px;
+    margin-top: 35px;
+    padding: 17px 36px;
 
     border: 1px solid var(--dourado);
     color: var(--dourado);
 
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 2px;
 
     transition: 0.4s;
@@ -205,53 +239,68 @@ section {
 .botao-historia:hover {
     background: var(--dourado);
     color: var(--fundo);
+    box-shadow: 0 0 30px rgba(217, 189, 131, 0.2);
+    transform: translateY(-3px);
 }
 
 .indicador-rolagem {
-    margin-top: 65px;
-    font-size: 25px;
+    margin-top: 55px;
+    font-size: 27px;
     color: var(--dourado);
-
     animation: descer 1.5s infinite;
 }
 
 @keyframes descer {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
 }
 
-
 /* =========================================
-   NOSSA HISTÓRIA
+   CAPÍTULOS E TEXTOS
 ========================================= */
 
 .historia {
-    background: var(--fundo-secundario);
-    padding-top: 130px;
-    padding-bottom: 130px;
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(46, 59, 86, 0.23), transparent 70%),
+        var(--fundo-secundario);
+}
+
+.historia:nth-of-type(even) {
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(71, 62, 77, 0.15), transparent 70%),
+        #0c1423;
 }
 
 section h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 5vw, 55px);
+    font-size: clamp(37px, 5vw, 58px);
     font-weight: 400;
+    line-height: 1.15;
     color: var(--bege);
-    margin-bottom: 35px;
+    margin-bottom: 38px;
+}
+
+.historia .identificacao,
+.familia .identificacao,
+.sonhos .identificacao,
+.final .identificacao {
+    display: inline-block;
+    padding-bottom: 13px;
+    border-bottom: 1px solid var(--borda);
 }
 
 .historia p:not(.identificacao) {
-    max-width: 720px;
-    margin: 20px auto;
-    line-height: 2;
-    font-size: 14px;
+    max-width: 730px;
+    margin: 22px auto;
+    line-height: 2.15;
+    font-size: 13px;
     color: var(--texto);
 }
 
+.historia strong {
+    color: var(--dourado-claro);
+    font-weight: 500;
+}
 
 /* =========================================
    NOSSA FAMÍLIA
@@ -259,58 +308,89 @@ section h2 {
 
 .familia {
     background:
-        linear-gradient(180deg, #111a2e, #0b1020);
+        radial-gradient(ellipse at 50% 40%, rgba(54, 72, 104, 0.25), transparent 65%),
+        #0a1120;
+}
+
+.familia > p:not(.identificacao) {
+    max-width: 700px;
+    margin: 20px auto;
+    line-height: 2;
+    font-size: 13px;
 }
 
 .galeria-familia {
     display: flex;
     justify-content: center;
-    gap: 45px;
+    align-items: stretch;
+    gap: 38px;
     flex-wrap: wrap;
     margin-top: 60px;
 }
 
 .foto-animal {
-    width: 260px;
+    width: 285px;
     padding: 15px;
-
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(217, 189, 131, 0.25);
-
+    background: var(--fundo-card);
+    border: 1px solid var(--borda);
     transition: 0.4s;
 }
 
 .foto-animal:hover {
-    transform: translateY(-8px);
+    transform: translateY(-9px);
     border-color: var(--dourado);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.22);
 }
 
 .foto-animal img {
+    display: block;
     width: 100%;
-    height: 260px;
+    height: 270px;
     object-fit: cover;
+    filter: saturate(0.85);
+    transition: 0.5s;
+}
+
+.foto-animal:hover img {
+    filter: saturate(1.1);
 }
 
 .foto-animal h3 {
-    margin-top: 20px;
+    margin-top: 22px;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 27px;
+    font-size: 30px;
     font-weight: 400;
     color: var(--dourado);
 }
 
+.foto-animal p {
+    margin: 12px 5px 8px;
+    font-size: 11px;
+    line-height: 1.9;
+    color: var(--texto-suave);
+}
 
 /* =========================================
    NOSSOS SONHOS
 ========================================= */
 
 .sonhos {
-    background: #10182b;
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(53, 69, 99, 0.22), transparent 70%),
+        #10182b;
+}
+
+.sonhos > p:not(.identificacao) {
+    max-width: 700px;
+    margin: 18px auto;
+    line-height: 2;
+    font-size: 13px;
 }
 
 .lista-sonhos {
     display: flex;
     justify-content: center;
+    align-items: stretch;
     gap: 25px;
     flex-wrap: wrap;
     margin-top: 60px;
@@ -318,46 +398,45 @@ section h2 {
 
 .sonho {
     width: 280px;
-    padding: 35px 25px;
-
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(217, 189, 131, 0.2);
-
+    padding: 38px 27px;
+    background: var(--fundo-card);
+    border: 1px solid var(--borda);
     transition: 0.4s;
 }
 
 .sonho:hover {
     transform: translateY(-8px);
     background: rgba(217, 189, 131, 0.07);
+    border-color: rgba(217, 189, 131, 0.6);
 }
 
 .sonho span {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 35px;
+    font-size: 39px;
     color: var(--dourado);
 }
 
 .sonho h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
+    font-size: 26px;
     font-weight: 500;
     color: var(--bege);
     margin: 20px 0;
 }
 
 .sonho p {
-    font-size: 12px;
-    line-height: 1.8;
+    font-size: 11px;
+    line-height: 2;
+    color: var(--texto-suave);
 }
-
 
 /* =========================================
    RODAPÉ
 ========================================= */
 
 .final {
-    min-height: 400px;
-    padding: 100px 10%;
+    min-height: 520px;
+    padding: 115px 10%;
 
     display: flex;
     flex-direction: column;
@@ -367,107 +446,39 @@ section h2 {
     text-align: center;
 
     background:
-        radial-gradient(ellipse at center, #263653, transparent 70%),
-        #080d19;
+        radial-gradient(ellipse at center, rgba(56, 73, 108, 0.55), transparent 70%),
+        #070c17;
 }
 
 .final h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 5vw, 50px);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 400;
     color: var(--bege);
+    margin-bottom: 15px;
 }
 
 .final p {
-    max-width: 600px;
-    font-size: 13px;
-    line-height: 2;
-    margin-top: 20px;
+    max-width: 650px;
+    font-size: 12px;
+    line-height: 2.1;
+    margin-top: 17px;
+    color: #c2c4ce;
 }
 
 .final .assinatura {
     color: var(--dourado);
     font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
+    font-size: 29px;
     font-style: italic;
-    margin: 35px 0;
+    margin: 38px 0;
 }
 
 .final span {
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 10px;
+    letter-spacing: 4px;
     color: var(--dourado);
 }
-
-
-/* =========================================
-   RESPONSIVIDADE - CELULAR
-========================================= */
-
-@media (max-width: 768px) {
-
-    section {
-        padding: 80px 7%;
-    }
-
-    .navegacao {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .menu {
-        gap: 18px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .menu a {
-        font-size: 10px;
-    }
-
-    .conteudo-inicial {
-        padding: 50px 20px;
-    }
-
-    .conteudo-inicial h1 {
-        font-size: 43px;
-    }
-
-    .mensagem-inicial {
-        font-size: 12px;
-    }
-
-    .galeria-familia {
-        gap: 25px;
-    }
-
-    .foto-animal {
-        width: min(100%, 300px);
-    }
-
-    .sonho {
-        width: 100%;
-    }
-
-    .final {
-        padding: 80px 7%;
-    }
-}
-
-@media (max-width: 380px) {
-
-    .conteudo-inicial h1 {
-        font-size: 36px;
-    }
-
-    .menu {
-        gap: 12px;
-    }
-
-    .menu a {
-        font-size: 9px;
-    }
-}
-
 
 /* =========================================
    ANIMAÇÕES DO JAVASCRIPT
@@ -484,29 +495,22 @@ section h2 {
     transform: translateY(0);
 }
 
-
 /* =========================================
    ESTRELAS DINÂMICAS
 ========================================= */
 
 .estrela {
     position: absolute;
-
     width: 2px;
     height: 2px;
-
     background: #fff;
     border-radius: 50%;
-
-    box-shadow: 0 0 6px #fff;
-
+    box-shadow: 0 0 7px #fff;
     animation: piscar 3s ease-in-out infinite alternate;
-
     pointer-events: none;
 }
 
 @keyframes piscar {
-
     from {
         opacity: 0.2;
         transform: scale(0.7);
@@ -516,5 +520,119 @@ section h2 {
         opacity: 1;
         transform: scale(1.5);
     }
+}
 
+/* =========================================
+   RESPONSIVIDADE — TABLETS E CELULARES
+========================================= */
+
+@media (max-width: 768px) {
+
+    section {
+        padding: 90px 7%;
+    }
+
+    .navegacao {
+        flex-direction: column;
+        gap: 25px;
+        padding: 25px 5%;
+    }
+
+    .menu {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu a {
+        font-size: 9px;
+    }
+
+    .conteudo-inicial {
+        padding: 55px 22px;
+    }
+
+    .conteudo-inicial h1 {
+        font-size: clamp(40px, 9vw, 55px);
+    }
+
+    .subtitulo {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .mensagem-inicial {
+        font-size: 12px;
+        margin-top: 38px;
+    }
+
+    .data,
+    .identificacao {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    section h2 {
+        font-size: 39px;
+    }
+
+    .historia p:not(.identificacao) {
+        font-size: 12px;
+        line-height: 2;
+    }
+
+    .galeria-familia {
+        gap: 25px;
+    }
+
+    .foto-animal {
+        width: min(100%, 320px);
+    }
+
+    .sonho {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .final {
+        padding: 90px 7%;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .conteudo-inicial h1 {
+        font-size: 36px;
+    }
+
+    .menu {
+        gap: 12px;
+    }
+
+    .menu a {
+        font-size: 8px;
+    }
+
+    section h2 {
+        font-size: 34px;
+    }
+
+    .botao-historia {
+        padding: 15px 22px;
+        font-size: 8px;
+    }
+}
+
+/* =========================================
+   ACESSIBILIDADE — MENOS MOVIMENTO
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
