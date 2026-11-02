@@ -500,6 +500,22 @@
     </script>
 
     <script>
+        // Fallback para o botão da tela inicial, caso o arquivo externo falhe.
+        (function () {
+            const entrada = document.querySelector('#telaEntrada');
+            const comecar = document.querySelector('#comecarHistoria');
+            if (entrada && comecar) {
+                comecar.addEventListener('click', function () {
+                    entrada.classList.add('saindo');
+                    document.body.classList.remove('tela-bloqueada');
+                    window.setTimeout(function () {
+                        entrada.remove();
+                        document.querySelector('#inicio')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 1000);
+                });
+            }
+        })();
+
         // Recursos essenciais com fallback independente do arquivo externo.
         (function () {
             const abrirHistoria = document.querySelector('#abrirNossaHistoria');
