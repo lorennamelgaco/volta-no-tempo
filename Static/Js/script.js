@@ -141,6 +141,13 @@ if (telaEntrada && botaoComecar) {
    NAVEGAÇÃO SUAVE E CAPÍTULO ATIVO
 ========================================= */
 
+const botaoAbrirHistoria = document.querySelector('#abrirNossaHistoria');
+if (botaoAbrirHistoria) {
+    botaoAbrirHistoria.addEventListener('click', () => {
+        document.body.classList.remove('aguardando-historia');
+    });
+}
+
 const linksInternos = document.querySelectorAll('a[href^="#"]');
 linksInternos.forEach((link) => {
     link.addEventListener('click', (evento) => {
