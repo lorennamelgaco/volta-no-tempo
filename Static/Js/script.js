@@ -156,3 +156,38 @@ if (telaEntrada && botaoComecar) {
         }, movimentoReduzido ? 0 : 1000);
     });
 }
+
+
+/* =========================================
+   PLAYER DE MÚSICAS DO YOUTUBE
+========================================= */
+const botoesMusica = document.querySelectorAll('.botao-musica');
+const youtubePlayer = document.querySelector('#youtubePlayer');
+
+if (botoesMusica.length && youtubePlayer) {
+    botoesMusica.forEach((botao) => {
+        botao.addEventListener('click', () => {
+            const videoId = botao.dataset.video;
+
+            botoesMusica.forEach((item) => {
+                item.classList.remove('ativo');
+                item.setAttribute('aria-pressed', 'false');
+            });
+
+            botao.classList.add('ativo');
+            botao.setAttribute('aria-pressed', 'true');
+
+            // Trocar o iframe encerra a música anterior antes de iniciar a escolhida.
+            youtubePlayer.innerHTML = '';
+
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.title = 'Player de música do YouTube';
+            iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+
+            youtubePlayer.appendChild(iframe);
+        });
+    });
+}
