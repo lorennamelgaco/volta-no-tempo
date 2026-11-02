@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="Static/Css/style.css">
 </head>
 
-<body class="tela-bloqueada">
+<body class="tela-bloqueada aguardando-historia">
 
     <section class="tela-entrada" id="telaEntrada" aria-label="Boas-vindas">
         <div class="entrada-conteudo">
@@ -100,9 +100,8 @@
                 <p>Então, por alguns minutos, quero que a gente volte no tempo.</p>
             </div>
 
-            <a href="#historia" class="botao">ABRIR NOSSA HISTÓRIA <span>↓</span></a>
+            <a href="#historia" class="botao" id="abrirNossaHistoria">ABRIR NOSSA HISTÓRIA <span>↓</span></a>
         </div>
-        <div class="indicador">ROLE PARA DESCOBRIR <span>⌄</span></div>
     </header>
 
     <main>
@@ -503,6 +502,14 @@
     <script>
         // Recursos essenciais com fallback independente do arquivo externo.
         (function () {
+            const abrirHistoria = document.querySelector('#abrirNossaHistoria');
+            if (abrirHistoria) {
+                abrirHistoria.addEventListener('click', function () {
+                    document.body.classList.remove('aguardando-historia');
+                    document.querySelector('#historia')?.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
             const botaoTopo = document.querySelector('.voltar-topo');
             if (botaoTopo) {
                 botaoTopo.addEventListener('click', function () {
