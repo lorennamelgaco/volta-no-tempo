@@ -58,11 +58,11 @@
     <p class="identificacao">NOSSA HISTÓRIA TEM TRILHA SONORA</p>
     <h2>Escolha a música que quer ouvir. ❤️</h2>
     <div class="seletor-musicas" role="group" aria-label="Escolha uma música">
-        <button class="botao-musica ativo" type="button" data-video="VPRjCeoBqrI" aria-pressed="true">
+        <button class="botao-musica ativo" type="button" data-video="VPRjCeoBqrI" onclick="selecionarMusica(this)" aria-pressed="true">
             <span>♫</span>
             <span><strong>A Sky Full of Stars</strong><small>Coldplay</small></span>
         </button>
-        <button class="botao-musica" type="button" data-video="JwNmNoWrz70" aria-pressed="false">
+        <button class="botao-musica" type="button" data-video="JwNmNoWrz70" onclick="selecionarMusica(this)" aria-pressed="false">
             <span>♫</span>
             <span><strong>Deus é Muito Bom</strong><small>Luan Santana</small></span>
         </button>
@@ -357,5 +357,31 @@
     </footer>
 
     <script src="Static/Js/script.js"></script>
+    <script>
+        // Controle direto dos botões de música, independente dos demais scripts.
+        window.selecionarMusica = function (botao) {
+            const player = document.getElementById('youtubePlayer');
+            const videoId = botao.getAttribute('data-video');
+
+            if (!player || !videoId) return;
+
+            document.querySelectorAll('.botao-musica').forEach((item) => {
+                item.classList.remove('ativo');
+                item.setAttribute('aria-pressed', 'false');
+            });
+
+            botao.classList.add('ativo');
+            botao.setAttribute('aria-pressed', 'true');
+
+            player.innerHTML = '';
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/' + videoId + '?rel=0';
+            iframe.title = 'Player de música do YouTube';
+            iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy = 'origin';
+            player.appendChild(iframe);
+        };
+    </script>
 </body>
 </html>
