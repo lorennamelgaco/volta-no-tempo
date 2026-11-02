@@ -134,3 +134,25 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 
 console.log('Uma história que começou em 03.03.2023 ❤️');
 console.log('Entre tudo que fomos e tudo que ainda podemos ser.');
+
+
+/* =========================================
+   TELA DE ENTRADA
+========================================= */
+
+const telaEntrada = document.querySelector('#telaEntrada');
+const botaoComecar = document.querySelector('#comecarHistoria');
+
+if (telaEntrada && botaoComecar) {
+    botaoComecar.addEventListener('click', () => {
+        telaEntrada.classList.add('saindo');
+        document.body.classList.remove('tela-bloqueada');
+
+        window.setTimeout(() => {
+            telaEntrada.remove();
+            document.querySelector('#inicio')?.scrollIntoView({
+                behavior: movimentoReduzido ? 'auto' : 'smooth'
+            });
+        }, movimentoReduzido ? 0 : 1000);
+    });
+}
