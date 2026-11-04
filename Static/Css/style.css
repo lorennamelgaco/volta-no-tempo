@@ -1696,3 +1696,80 @@ body.aguardando-historia main,
 body.aguardando-historia footer.final {
     display: none !important;
 }
+
+
+/* REFINOS — FOTOGRAFIAS E INTRODUÇÃO DA CARTA */
+.moldura-foto,
+.memoria-imagem {
+    overflow: hidden;
+    border: 0;
+}
+
+.moldura-foto img,
+.memoria-imagem img,
+.galeria-casal-grid img {
+    transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease;
+}
+
+.foto-polaroid:hover .moldura-foto img,
+.memoria-foto:hover .memoria-imagem img,
+.galeria-casal-grid figure:hover img {
+    transform: scale(1.045);
+    filter: saturate(1.06);
+}
+
+.memoria-imagem img {
+    display: block;
+    width: 100%;
+    height: 290px;
+    min-height: 290px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.galeria-casal-grid img {
+    cursor: zoom-in;
+}
+
+.album-gatos .moldura-foto img,
+.memoria-imagem img,
+.galeria-casal-grid img {
+    backface-visibility: hidden;
+}
+
+.introducao-carta {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    padding: 28px 34px;
+    text-align: center;
+    border: 1px solid var(--borda);
+    background: linear-gradient(145deg, rgba(217,189,131,.075), rgba(255,255,255,.025));
+}
+
+.introducao-carta h3 {
+    margin: 8px 0 10px;
+    color: var(--bege);
+    font: 500 clamp(25px, 4vw, 34px)/1.15 var(--serif);
+}
+
+.introducao-carta p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--suave);
+    font-size: 12px;
+    line-height: 2;
+}
+
+@media (max-width: 600px) {
+    .introducao-carta { padding: 24px 20px; }
+    .introducao-carta p { font-size: 11px; }
+    .memoria-imagem img { height: 245px; min-height: 245px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .moldura-foto img,
+    .memoria-imagem img,
+    .galeria-casal-grid img {
+        transition: none;
+    }
+}
