@@ -44,7 +44,7 @@
             <a href="#historia">Nossa história</a>
             <a href="#casa">Nosso lar</a>
             <a href="#familia">Nossa família</a>
-            <a href="#sonhos">Nossos sonhos</a>
+            <a href="#sonhos">O que já vivemos</a>
             <a href="#memorias">Nossas lembranças</a>
         </div>
     </nav>
@@ -232,7 +232,7 @@
                         <img src="Static/Images/lua/lua.jpg" alt="Nossa gatinha Lua" loading="lazy" decoding="async">
                     </div>
                     <h3>Lua</h3>
-                    <p>Você queria mais uma companheirinha e ela chegou para completar ainda mais a nossa bagunça ou bagunçar ainda mais a casa.</p>
+                    <p>Você queria mais uma companheirinha, e ela chegou para completar a nossa família — ou, talvez, para bagunçar ainda mais a casa. KKKK.</p>
                     <span class="rabisco">✧</span>
                 </article>
             </div>
@@ -257,9 +257,8 @@
             <small>UMA NOITE ESPECIAL</small>
             <h3>O show do Luan Santana</h3>
             <p>
-                Uma noite que cantamos juntas, aproveitando cada música -mesmo que eu não seja fã-
-                e vivemos uma experiência que um dia era só vontade.
-                Agora é uma lembrança nossa.
+                Uma noite em que cantamos juntas, aproveitamos cada música — mesmo que eu não seja exatamente fã — e realizamos algo que um dia era só vontade.
+                Hoje, é mais uma lembrança nossa.
             </p>
         </article>
 
@@ -279,9 +278,9 @@
             <small>UM DETALHE COM SIGNIFICADO</small>
             <h3>Nossa mesa na cozinha</h3>
             <p>
-                Poderia parecer um detalhe simples para qualquer pessoa,
-                mas tinha um significado especial para você e como todo sonho seu, sempre quero estar lá para realizar.
-                E hoje também faz parte da nossa história, mesmo tendo sido um INFERNO para montar.
+                Pode parecer um detalhe simples para qualquer pessoa, mas tinha um significado especial para você.
+                E, como acontece com tantos sonhos seus, eu queria estar ao seu lado para realizar esse também.
+                Hoje, nossa mesa faz parte da história — mesmo tendo sido um INFERNO para montar.
             </p>
         </article>
     </div>
@@ -300,7 +299,7 @@
                 <span class="numero-capitulo">05</span>
                 <p class="identificacao">PEQUENOS GRANDES MOMENTOS</p>
                 <h2>Alguns dias que ficaram com a gente</h2>
-                <p class="frase-capitulo">Tem lembrança que merece uma página só dela e momento que merece o coração, esses são os meus.</p>
+                <p class="frase-capitulo">Tem lembranças que merecem uma página só delas e momentos que merecem ficar guardados no coração. Esses são alguns dos meus favoritos.</p>
             </div>
 
             <div class="memorias-grid">
@@ -333,7 +332,7 @@
                     <div class="memoria-legenda">
                         <span>ÉPOCA DE CELEBRAR</span>
                         <h3>Nosso Natal</h3>
-                        <p>Mais um capítulo, muito importante pra mim e virou importante para você, feito de detalhes que ganharam significado para nós.</p>
+                        <p>Um capítulo que sempre foi muito importante para mim e que, aos poucos, também ganhou um significado especial para você. Feito de pequenos detalhes que se tornaram nossos.</p>
                     </div>
                 </article>
 
@@ -376,6 +375,12 @@
                 <span class="numero-capitulo">06</span>
                 <p class="identificacao">SEM PULAR NENHUMA PÁGINA</p>
                 <h2>Uma pausa para sentir</h2>
+            </div>
+
+            <div class="introducao-carta">
+                <span class="identificacao">ANTES DE ABRIR</span>
+                <h3>Se tem algo que eu queria que você lembrasse...</h3>
+                <p>Não estou te mostrando essas lembranças para fingir que tudo foi perfeito. Estou te mostrando porque, mesmo conhecendo nossas dificuldades, sei o quanto essa história foi importante e o quanto ela ainda significa para mim.</p>
             </div>
 
             <div class="carta-interativa">
@@ -513,109 +518,7 @@
         };
     </script>
 
-    <script>
-        // Fallback para o botão da tela inicial, caso o arquivo externo falhe.
-        (function () {
-            const entrada = document.querySelector('#telaEntrada');
-            const comecar = document.querySelector('#comecarHistoria');
-            if (entrada && comecar) {
-                comecar.addEventListener('click', function () {
-                    entrada.classList.add('saindo');
-                    document.body.classList.remove('tela-bloqueada');
-                    window.setTimeout(function () {
-                        entrada.remove();
-                        document.querySelector('#inicio')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 1000);
-                });
-            }
-        })();
 
-        // Recursos essenciais com fallback independente do arquivo externo.
-        (function () {
-            const abrirHistoria = document.querySelector('#abrirNossaHistoria');
-            if (abrirHistoria) {
-                abrirHistoria.addEventListener('click', function () {
-                    document.body.classList.remove('aguardando-historia');
-                    // O link e o script principal cuidam do deslocamento até o capítulo.
-                });
-            }
-
-            const botaoTopo = document.querySelector('.voltar-topo');
-            if (botaoTopo) {
-                botaoTopo.addEventListener('click', function () {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-
-            // Se o script principal não tiver criado a galeria ampliada,
-            // este bloco assume a interação das fotografias.
-            if (!document.querySelector('.lightbox-fotos')) {
-                const fotos = Array.from(document.querySelectorAll(
-                    '.galeria-casal-grid img, .memorias-grid img, .album-gatos img'
-                ));
-
-                if (fotos.length) {
-                    const caixa = document.createElement('div');
-                    caixa.className = 'lightbox-fotos';
-                    caixa.innerHTML = `
-                        <button class="lightbox-fechar" type="button" aria-label="Fechar">×</button>
-                        <button class="lightbox-seta lightbox-anterior" type="button" aria-label="Foto anterior">‹</button>
-                        <div class="lightbox-conteudo">
-                            <img alt="">
-                            <p class="lightbox-legenda"></p>
-                            <span class="lightbox-contador"></span>
-                        </div>
-                        <button class="lightbox-seta lightbox-proxima" type="button" aria-label="Próxima foto">›</button>
-                    `;
-                    document.body.appendChild(caixa);
-
-                    const imagem = caixa.querySelector('img');
-                    const legenda = caixa.querySelector('.lightbox-legenda');
-                    const contador = caixa.querySelector('.lightbox-contador');
-                    let atual = 0;
-
-                    function mostrar(indice) {
-                        atual = (indice + fotos.length) % fotos.length;
-                        imagem.src = fotos[atual].currentSrc || fotos[atual].src;
-                        imagem.alt = fotos[atual].alt || 'Foto da nossa história';
-                        const figcaption = fotos[atual].closest('figure')?.querySelector('figcaption');
-                        const titulo = fotos[atual].closest('.memoria-foto')?.querySelector('h3')
-                            || fotos[atual].closest('.foto-polaroid')?.querySelector('h3');
-                        legenda.textContent = figcaption?.textContent || titulo?.textContent || imagem.alt;
-                        contador.textContent = (atual + 1) + ' / ' + fotos.length;
-                    }
-
-                    function abrir(indice) {
-                        mostrar(indice);
-                        caixa.classList.add('aberto');
-                        document.body.classList.add('lightbox-aberto');
-                    }
-
-                    function fechar() {
-                        caixa.classList.remove('aberto');
-                        document.body.classList.remove('lightbox-aberto');
-                    }
-
-                    fotos.forEach((foto, indice) => {
-                        foto.style.cursor = 'zoom-in';
-                        foto.addEventListener('click', () => abrir(indice));
-                    });
-                    caixa.querySelector('.lightbox-fechar').addEventListener('click', fechar);
-                    caixa.querySelector('.lightbox-anterior').addEventListener('click', () => mostrar(atual - 1));
-                    caixa.querySelector('.lightbox-proxima').addEventListener('click', () => mostrar(atual + 1));
-                    caixa.addEventListener('click', evento => {
-                        if (evento.target === caixa) fechar();
-                    });
-                    document.addEventListener('keydown', evento => {
-                        if (!caixa.classList.contains('aberto')) return;
-                        if (evento.key === 'Escape') fechar();
-                        if (evento.key === 'ArrowLeft') mostrar(atual - 1);
-                        if (evento.key === 'ArrowRight') mostrar(atual + 1);
-                    });
-                }
-            }
-        })();
-    </script>
 
 </body>
 </html>
